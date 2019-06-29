@@ -34,14 +34,33 @@ async function createCourse(){
 }
 
 async function getCourses() {
-	const courses = await Course.find({
-		author: 'Mosh'
-	})
+
+	// eq (equal)
+	// ne (not equal)
+	// gt (great than)
+	// gte (greater than or equal to)
+	//lt (less than)
+	//lte (less than or equal to)
+	// in
+	// nin (not in)
+
+	const courses = await Course
+	// .find({ author: 'Mosh'})
+// -----------------------------
+	//Courses are greater than or equal to 10$
+	// .find({ price: { $gte: 10 } })
+// -----------------------------
+	// courses are greater than or equal to 10 & smaller than or equal to 20$
+	// .find({ price: { $gte: 10, $lte: 20 } })
+// -----------------------------
+	// Courses price in 10,15 or 20
+	// .find({ price: { $in: [10, 15 , 20] } })
+// -----------------------------
+
 	.limit(10)
 	.sort({ name: 1 })
 	.select({ name: 1, tags:1 });
 	console.log(courses);
-
 }
 
 // createCourse();
