@@ -1,0 +1,23 @@
+{
+  "name": "mongodb-practice",
+  "version": "1.0.0",
+  "description": "Mongodb Practices with node (from mosh tutorials)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nerdjfpb/mongodb-practice.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nerdjfpb/mongodb-practice/issues"
+  },
+  "homepage": "https://github.com/nerdjfpb/mongodb-practice#readme",
+  "dependencies": {
+    "mongoose": "^5.6.2"
+  }
+}
