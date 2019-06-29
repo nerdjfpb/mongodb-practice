@@ -45,7 +45,7 @@ async function getCourses() {
 	// nin (not in)
 
 	const courses = await Course
-	// .find({ author: 'Mosh'})
+	
 // -----------------------------
 	//Courses are greater than or equal to 10$
 	// .find({ price: { $gte: 10 } })
@@ -57,6 +57,13 @@ async function getCourses() {
 	// .find({ price: { $in: [10, 15 , 20] } })
 // -----------------------------
 
+// logical operators
+	// or
+	// and
+	// .find({ author: 'Mosh'})
+	.find()
+	.or( [ {author: 'Mosh'}, { isPublished: true } ] )
+	.and( [ {author: 'Mosh'}, { isPublished: true } ])
 	.limit(10)
 	.sort({ name: 1 })
 	.select({ name: 1, tags:1 });
