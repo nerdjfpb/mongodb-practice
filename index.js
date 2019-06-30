@@ -74,10 +74,12 @@ async function getCourses() {
 	// /.*Mosh.*/i --- This means Mosh is anywhere on the name (not case senstive)
 	// Need a i for not case sensitive.
 
+//counting
 	.find({ author: 'Mosh'})
 	.limit(10)
 	.sort({ name: 1 })
-	.select({ name: 1, tags:1 });
+	// .select({ name: 1, tags:1 });
+	.count();
 	console.log(courses);
 }
 
