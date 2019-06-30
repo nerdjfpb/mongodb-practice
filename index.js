@@ -35,6 +35,15 @@ async function createCourse(){
 
 async function getCourses() {
 
+	//paginations
+	const pageNumber = 2;
+	const pageSize = 10;
+	// link will be api/courses?pageNumber=2&pageSize=10;
+	// .skip((pageNumber-1) * pageSize)
+	// .limit(pageSize)
+	// This two lines needed for implementations
+
+//arithmetic operators
 	// eq (equal)
 	// ne (not equal)
 	// gt (great than)
@@ -75,11 +84,14 @@ async function getCourses() {
 	// Need a i for not case sensitive.
 
 //counting
+	// .count();
+
+
 	.find({ author: 'Mosh'})
-	.limit(10)
+	.skip((pageNumber-1) * pageSize)
+	.limit(pageSize)
 	.sort({ name: 1 })
 	// .select({ name: 1, tags:1 });
-	.count();
 	console.log(courses);
 }
 
