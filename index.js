@@ -60,10 +60,21 @@ async function getCourses() {
 // logical operators
 	// or
 	// and
-	// .find({ author: 'Mosh'})
-	.find()
-	.or( [ {author: 'Mosh'}, { isPublished: true } ] )
-	.and( [ {author: 'Mosh'}, { isPublished: true } ])
+	// .find()
+	// .or( [ {author: 'Mosh'}, { isPublished: true } ] )
+	// .and( [ {author: 'Mosh'}, { isPublished: true } ])
+
+
+//  Regular Expression
+	// /pattern/ -- This is the way to describe regular expressions
+	// /^Mosh/ --- This is gonna start with Mosh
+	// /Hamedani$/ --- This is gonna end with Hamedani (case sensitive)
+	// /Hamedani$/i --- This is gonna end with Hamedani (not case sensitive)
+	// /.*Mosh.*/ --- This means Mosh is anywhere on the name (case senstive)
+	// /.*Mosh.*/i --- This means Mosh is anywhere on the name (not case senstive)
+	// Need a i for not case sensitive.
+
+	.find({ author: 'Mosh'})
 	.limit(10)
 	.sort({ name: 1 })
 	.select({ name: 1, tags:1 });
