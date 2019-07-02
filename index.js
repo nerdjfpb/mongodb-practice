@@ -141,8 +141,19 @@ async function updateCourse(id) {
 	console.log(course);
 }
 
+async function removeCourse(id) {
+//normally delete one. using deleteOne, if we need many then use deleteMany
+
+	// const result = await Course.deleteOne({ _id: id });
+	// console.log(result);
+
+//if we need to return what deleted.
+	const course = await Course.findByIdAndRemove(id);
+	console.log(course);
+}
 
 
 // createCourse();
 // getCourses();
 // updateCourse('5d17862b0346df121c12b5cf');
+// removeCourse('5d17862b0346df121c12b5cf');
