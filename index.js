@@ -11,11 +11,11 @@ mongoose.connect('mongodb://localhost/playground')
 // ObjectID
 // Array
 const courseSchema = new mongoose.Schema({
-	name: String,
-	author: String,
-	tags: [ String ],
+	name: { type: String, required:true },
+	author: { type: String, required:true },
+	tags: [ { type: String, required:true } ],
 	date: { type: Date, default: Date.now },
-	isPublished: Boolean
+	isPublished: { type: Boolean, required:true }
 });
 
 const Course = mongoose.model('course', courseSchema);
@@ -23,14 +23,20 @@ const Course = mongoose.model('course', courseSchema);
 //create from CRUD
 async function createCourse(){
 	const course = new Course({
-		name: 'Angular js course',
+		name: 'Node Express js course',
 		author: 'Mosh',
-		tags: ['angular', 'frontend'],
+		tags: ['Node', 'Express'],
 		isPublished: true
 	});
 
-	const result = await course.save();
-	console.log(result);
+	try {
+		// await course.validate()
+		const result = await course.save();
+		console.log(result);
+	}
+	catch (ex) {
+		console.log(ex.message);
+	}
 
 }
 // Read from CRUD
@@ -153,7 +159,7 @@ async function removeCourse(id) {
 }
 
 
-// createCourse();
+createCourse();
 // getCourses();
 // updateCourse('5d17862b0346df121c12b5cf');
 // removeCourse('5d17862b0346df121c12b5cf');
