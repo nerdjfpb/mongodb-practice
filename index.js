@@ -20,6 +20,7 @@ const courseSchema = new mongoose.Schema({
 
 const Course = mongoose.model('course', courseSchema);
 
+//create from CRUD
 async function createCourse(){
 	const course = new Course({
 		name: 'Angular js course',
@@ -32,7 +33,7 @@ async function createCourse(){
 	console.log(result);
 
 }
-
+// Read from CRUD
 async function getCourses() {
 
 	//paginations
@@ -95,7 +96,34 @@ async function getCourses() {
 	console.log(courses);
 }
 
+
+
+//Update from CRUD
+//query first technique to update a data in mongodb
+async function updateCourse(id) {
+	// Approch: Query First
+	// findById();
+	// Modify its properties
+	// save();
+	const course = await Course.findById(id);
+	if(!course) return;
+	course.isPublished=true;
+	course.author = 'Another Author';
+//Same thing as up
+	// course.set({
+	// 	isPublished: true,
+	// 	author: 'Another Author'
+	// });
+//update section
+const result = await course.save();
+console.log(result);
+
+
+	// Approch: Update First
+	// Update directly
+	//Optionally: get the updated Document
+}
+
 // createCourse();
-getCourses();
-
-
+// getCourses();
+updateCourse('5d17862b0346df121c12b5cf');
