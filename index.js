@@ -100,30 +100,49 @@ async function getCourses() {
 
 //Update from CRUD
 //query first technique to update a data in mongodb
-async function updateCourse(id) {
+// async function updateCourse(id) {
 	// Approch: Query First
 	// findById();
 	// Modify its properties
 	// save();
-	const course = await Course.findById(id);
-	if(!course) return;
-	course.isPublished=true;
-	course.author = 'Another Author';
+	// const course = await Course.findById(id);
+	// if(!course) return;
+	// course.isPublished=true;
+	// course.author = 'Another Author';
 //Same thing as up
 	// course.set({
 	// 	isPublished: true,
 	// 	author: 'Another Author'
 	// });
 //update section
-const result = await course.save();
-console.log(result);
+// 	const result = await course.save();
+// 	console.log(result);
+// }
 
-
-	// Approch: Update First
-	// Update directly
-	//Optionally: get the updated Document
+// Approch: Update First
+// Update directly
+//Optionally: get the updated Document
+async function updateCourse(id) {
+	//direct update
+	const result = await Course.update({ _id: id }, {
+		$set: {
+			author: 'Mosh',
+			isPublished: false
+		}
+	});
+	console.log(result);
+	//find through id and update the class.
+	const course = await Course.findByIdAndUpdate(id, {
+		$set: {
+			author: 'Mosh',
+			isPublished: false
+		}
+	}, { new: true });
+	console.log(course);
 }
+
+
 
 // createCourse();
 // getCourses();
-updateCourse('5d17862b0346df121c12b5cf');
+// updateCourse('5d17862b0346df121c12b5cf');
