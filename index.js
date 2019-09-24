@@ -11,11 +11,42 @@ mongoose.connect('mongodb://localhost/playground')
 // ObjectID
 // Array
 const courseSchema = new mongoose.Schema({
-	name: { type: String, required:true },
+	// min & max length are built in validator
+	name: { 
+		type: String, 
+		required:true,
+		minlength: 5,
+		maxlength: 255
+		// match: /pattern/
+	},
+	//enum is pre defined strings.
+	category: {
+		type: String,
+		required: true,
+		enum: ['web', 'mobile', 'network']
+	},
 	author: { type: String, required:true },
-	tags: [ { type: String, required:true } ],
+	//custom validator
+	tags: {
+		type: Array,
+		validate: {
+			validator: function(v){
+				return v && v.length > 0;
+			},
+			message: 'A course should have at least one tag.'
+		}
+	}
+	,
 	date: { type: Date, default: Date.now },
-	isPublished: { type: Boolean, required:true }
+	isPublished: { type: Boolean, required:true },
+	//Built in validatior, price will be number if isPublished is true.
+	// min, max is built in validator
+	price: {
+		type: Number,
+		required: function() { return this.isPublished },
+		min: 10,
+		max: 100
+	}
 });
 
 const Course = mongoose.model('course', courseSchema);
@@ -23,10 +54,12 @@ const Course = mongoose.model('course', courseSchema);
 //create from CRUD
 async function createCourse(){
 	const course = new Course({
-		name: 'Node Express js course',
+		name: 'Random one',
 		author: 'Mosh',
-		tags: ['Node', 'Express'],
-		isPublished: true
+		category: 'web',
+		tags: ['Random'],
+		isPublished: true,
+		price: 50
 	});
 
 	try {
